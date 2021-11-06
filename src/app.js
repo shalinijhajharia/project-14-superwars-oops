@@ -2,13 +2,13 @@ const PLAYERS = [
     "Spiderman",
     "Captain America",
     "Wonderwoman",
-    // "Popcorn",
-    // "Gemwoman",
-    // "Bolt",
-    // "Antwoman",
-    // "Mask",
-    // "Tiger",
-    // "Captain",
+     "Popcorn",
+     "Gemwoman",
+     "Bolt",
+     "Antwoman",
+     "Mask",
+     "Tiger",
+     "Captain",
     // "Catwoman",
     // "Fish",
     // "Hulk",
@@ -26,6 +26,12 @@ class Player {
     constructor(id, name, type) {
         // Create member variables and assign values
         // Type your code
+        this.id=id;
+        this.name=name;
+        this.type=type;
+        this.strength= this.getRandomStrength();
+        
+
 
     }
 
@@ -38,8 +44,23 @@ class Player {
     view = () => {
         // Accumulate HTML template
         // Type your code here
+        let player = document.createElement('div');
+        player.setAttribute('class','player');
+        player.setAttribute('data-id', this.id);
 
-    
+        let image = document.createElement('img');
+        image.setAttribute('src', "images/super-"+(this.id+1)+".png");
+
+        let name = document.createElement('div');
+        name.setAttribute('class','name');
+        name.innerHTML = this.name;
+
+        let strength = document.createElement('div');
+        strength.setAttribute('class','strength');
+        strength.innerHTML = this.strength;
+        
+
+        player.append(image, name, strength);  
         return player;
     }
 }
@@ -50,6 +71,15 @@ class Superwar {
     // Create a field players 
     // Use Map method to loop through players argument and create new players
     // Type your code here
+    this.players = players.map((player, i) => {
+        let type='villain';
+        if(i%2===0)
+        {
+         type='hero';   
+        }
+
+       return new Player(i, player, type);
+    });
 
     }
 
